@@ -1,0 +1,1425 @@
+{
+  "info": {
+    "name": "Rekko AI \u2014 Prediction Market Intelligence",
+    "_postman_id": "a9a5ad9c-9a4f-5449-838f-d1c51386b6d9",
+    "description": "The brain for prediction market trading. Deep AI research, Bayesian causal decomposition, portfolio-aware strategy signals, cross-platform arbitrage, and execution guidance \u2014 all in one API. Covers Kalshi, Polymarket, and Robinhood. Clean flat JSON designed for developers and autonomous trading agents.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{api_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.rekko.ai",
+      "type": "string"
+    },
+    {
+      "key": "api_key",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Analytics",
+      "description": "Calibration metrics, sentiment, and performance tracking",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "health"
+              ]
+            },
+            "description": "Health check with data freshness and platform coverage stats."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Get tier pricing",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/pricing",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "pricing"
+              ]
+            },
+            "description": "Return tier pricing for all feed endpoints (no auth required)."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Acquisition-readiness metrics dashboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/metrics",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "metrics"
+              ]
+            },
+            "description": "Internal metrics for tracking acquisition-readiness KPIs.\n\nReturns active developers, monthly API calls, calls by tier/auth method,\nand platform coverage. Admin access only."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Signal accuracy and calibration metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/calibration",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "calibration"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "Filter by category (e.g. 'crypto', 'politics')",
+                  "disabled": true
+                },
+                {
+                  "key": "period",
+                  "value": "all",
+                  "description": "Time period: '7d', '30d', '90d', or 'all'",
+                  "disabled": true
+                },
+                {
+                  "key": "mode",
+                  "value": "shadow",
+                  "description": "Trading mode: 'shadow' or 'live'",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Signal accuracy and calibration metrics (free, no auth required)."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Market sentiment snapshot",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/sentiment",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "sentiment"
+              ]
+            },
+            "description": "Aggregate market sentiment from price momentum and volume trends."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active_market_count\": 847,\n  \"dominant_category\": \"crypto\",\n  \"fear_greed_index\": 62,\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"market_regime\": \"risk_on\",\n  \"spread_trend\": \"stable\",\n  \"top_movers\": [\n    {\n      \"market_id\": \"KXBTC-100K-MAR26\",\n      \"platform\": \"kalshi\",\n      \"price_change_24h\": 0.12,\n      \"title\": \"Will Bitcoin exceed $100K in March 2026?\",\n      \"volume_24h\": 892000.0,\n      \"yes_price\": 0.45\n    }\n  ],\n  \"volume_trend\": \"rising\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Trading track record",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/performance",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "performance"
+              ],
+              "query": [
+                {
+                  "key": "mode",
+                  "value": "shadow",
+                  "description": "Trading mode: 'shadow' or 'live'",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Win rate, P&L, ROI, and edge metrics."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"avg_edge\": 0.065,\n  \"generated_at\": \"2026-03-21T15:00:00Z\",\n  \"max_drawdown\": -145.0,\n  \"mode\": \"shadow\",\n  \"resolved_trades\": 112,\n  \"roi_pct\": 8.9,\n  \"sharpe_ratio\": 1.82,\n  \"total_pnl\": 892.5,\n  \"total_trades\": 156,\n  \"win_rate\": 0.68\n}"
+            }
+          ]
+        },
+        {
+          "name": "Equity curve history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/performance/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "performance",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "mode",
+                  "value": "shadow",
+                  "description": "Trading mode: 'shadow' or 'live'",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Daily P&L time series for equity curve charting."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"avg_edge\": 0.065,\n  \"generated_at\": \"2026-03-21T15:00:00Z\",\n  \"max_drawdown\": -145.0,\n  \"mode\": \"shadow\",\n  \"resolved_trades\": 112,\n  \"roi_pct\": 8.9,\n  \"sharpe_ratio\": 1.82,\n  \"total_pnl\": 892.5,\n  \"total_trades\": 156,\n  \"win_rate\": 0.68\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Markets",
+      "description": "Prediction market listings, history, resolution, and execution guidance",
+      "item": [
+        {
+          "name": "List prediction markets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets"
+              ],
+              "query": [
+                {
+                  "key": "source",
+                  "value": "",
+                  "description": "Filter by platform: 'kalshi' or 'polymarket'",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "30",
+                  "description": "Maximum markets to return",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List current prediction markets with pricing data."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"category\": \"economics\",\n    \"liquidity\": 85000.0,\n    \"market_id\": \"KXFED-26MAR19\",\n    \"open_interest\": 312000.0,\n    \"platform\": \"kalshi\",\n    \"resolution_date\": \"2026-03-19T20:00:00Z\",\n    \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n    \"updated_at\": \"2026-03-21T14:30:00Z\",\n    \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n    \"volume_24h\": 142350.0,\n    \"yes_price\": 0.62\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get a single market",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "",
+                  "description": "Comma-separated expansions",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Get a single market listing by platform and ID."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"category\": \"economics\",\n  \"liquidity\": 85000.0,\n  \"market_id\": \"KXFED-26MAR19\",\n  \"open_interest\": 312000.0,\n  \"platform\": \"kalshi\",\n  \"resolution_date\": \"2026-03-19T20:00:00Z\",\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n  \"updated_at\": \"2026-03-21T14:30:00Z\",\n  \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n  \"volume_24h\": 142350.0,\n  \"yes_price\": 0.62\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get market price history",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "7d",
+                  "description": "Time period: '48h', '7d', or '30d'",
+                  "disabled": true
+                },
+                {
+                  "key": "max_points",
+                  "value": "48",
+                  "description": "Maximum data points to return",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Get historical price and volume data for backtesting."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Get trade execution guidance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/execution",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "execution"
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Optimal trade execution analysis from bid/ask spread patterns."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"avg_spread_48h\": 0.03,\n  \"current_ask\": 0.64,\n  \"current_bid\": 0.6,\n  \"current_spread\": 0.04,\n  \"estimated_slippage_pct\": 0.8,\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"hours_to_event\": 18.5,\n  \"liquidity_score\": 68,\n  \"market_id\": \"KXFED-26MAR19\",\n  \"platform\": \"kalshi\",\n  \"rationale\": \"Spread is wider than usual (72nd percentile). Use a limit order at 0.61 to capture midpoint. Avoid market orders \\u2014 slippage ~0.8% at current depth.\",\n  \"recommendation\": \"LIMIT_ORDER\",\n  \"spread_percentile\": 72.0,\n  \"spread_trend\": \"widening\",\n  \"suggested_limit_price\": 0.61,\n  \"tick_count\": 96,\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n  \"upcoming_event\": \"FOMC Statement\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get resolution intelligence",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/resolution",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "resolution"
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Resolution timing, mechanism, and time-value analysis."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"close_date\": \"2026-03-19T14:00:00Z\",\n  \"expiration_date\": \"2026-03-19T20:00:00Z\",\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"hours_to_expiration\": 42.5,\n  \"key_dates\": [\n    {\n      \"date\": \"2026-03-19T14:00:00Z\",\n      \"impact\": \"high\",\n      \"label\": \"FOMC Rate Decision announcement\"\n    },\n    {\n      \"date\": \"2026-03-19T14:30:00Z\",\n      \"impact\": \"medium\",\n      \"label\": \"Fed Chair press conference\"\n    }\n  ],\n  \"market_id\": \"KXFED-26MAR19\",\n  \"platform\": \"kalshi\",\n  \"recurring_schedule\": \"Fed Rate Decision\",\n  \"resolution_mechanism\": \"scheduled_data_release\",\n  \"rules_summary\": \"Resolves YES if the Federal Reserve announces a target rate decrease at the March 2026 FOMC meeting.\",\n  \"status\": \"active\",\n  \"theta_estimate\": 0.3,\n  \"time_urgency\": \"high\",\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Batch screen markets",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/screen",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "screen"
+              ]
+            },
+            "description": "Batch screen markets with lightweight scoring (no LLM pipeline).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 20,\n  \"min_score\": 0.5,\n  \"min_volume_24h\": 50000,\n  \"platform\": \"kalshi\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"action\": \"analyze\",\n    \"cached_confidence\": 0.82,\n    \"cached_edge\": 0.09,\n    \"cached_recommendation\": \"BUY_YES\",\n    \"category\": \"economics\",\n    \"market_id\": \"KXFED-26MAR19\",\n    \"platform\": \"kalshi\",\n    \"score\": 1.45,\n    \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n    \"trend\": \"rising\",\n    \"volume_24h\": 142350.0,\n    \"volume_spike\": true,\n    \"yes_price\": 0.62\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Insights",
+      "description": "AI-powered research insights with causal decomposition",
+      "item": [
+        {
+          "name": "Get latest analysis for a market",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/analysis",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "analysis"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "",
+                  "description": "Comma-separated expansions",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Get the latest AI analysis for a market, keyed by platform and market ID."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analyzed_at\": \"2026-03-21T12:00:00Z\",\n  \"confidence\": 0.82,\n  \"edge\": 0.09,\n  \"expires_at\": \"2026-03-22T12:00:00Z\",\n  \"key_factors\": [\n    \"PCE inflation at 2.1% \\u2014 within Fed target range\",\n    \"Three FOMC members signaled openness to cuts in recent speeches\",\n    \"Jobless claims trending upward (225K \\u2192 238K over 4 weeks)\"\n  ],\n  \"market_id\": \"KXFED-26MAR19\",\n  \"platform\": \"kalshi\",\n  \"probability\": 0.71,\n  \"recommendation\": \"BUY_YES\",\n  \"risk_rating\": \"low\",\n  \"risks\": [\n    \"Strong March employment report could reverse dovish signals\",\n    \"Tariff escalation could reignite inflation expectations\"\n  ],\n  \"source_count\": 14,\n  \"summary\": \"Fed futures imply 68% probability of a March cut. PCE inflation at 2.1% is within the Fed's comfort zone, and three FOMC members have signaled openness to easing. Our research across 14 sources estimates 71% true probability \\u2014 a 9-point edge over the current market price of 62c.\",\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "List recent analyses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/analyses",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "analyses"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum analyses to return",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List recent analysis summaries, keyed by market."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"analyzed_at\": \"2026-03-21T12:00:00Z\",\n    \"confidence\": 0.82,\n    \"market_id\": \"KXFED-26MAR19\",\n    \"platform\": \"kalshi\",\n    \"probability\": 0.71,\n    \"recommendation\": \"BUY_YES\",\n    \"title\": \"Will the Fed cut rates at the March 2026 meeting?\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Trigger new analysis",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/analyze",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "analyze"
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Start an async analysis for a specific market. Poll the status URL for completion."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analysis_id\": \"rk-a1b2c3d4e5f6\",\n  \"estimated_seconds\": 60,\n  \"poll_url\": \"/v1/markets/kalshi/KXFED-26MAR19/analyze/rk-a1b2c3d4e5f6/status\",\n  \"status\": \"running\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Poll analysis status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/analyze/:analysis_id/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "analyze",
+                ":analysis_id",
+                "status"
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                },
+                {
+                  "key": "analysis_id",
+                  "value": "a1b2c3d4",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Check the status of an async analysis."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analysis_id\": \"rk-a1b2c3d4e5f6\",\n  \"estimated_seconds\": 60,\n  \"poll_url\": \"/v1/markets/kalshi/KXFED-26MAR19/analyze/rk-a1b2c3d4e5f6/status\",\n  \"status\": \"running\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Strategy",
+      "description": "Actionable trading signals with Kelly-derived position sizing and causal decomposition",
+      "item": [
+        {
+          "name": "Generate AI strategy signal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/signals",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "signals"
+              ],
+              "query": [
+                {
+                  "key": "wait",
+                  "value": "False",
+                  "description": "Block until analysis completes (up to 5 min)",
+                  "disabled": true
+                },
+                {
+                  "key": "expand",
+                  "value": "",
+                  "description": "Comma-separated expansions",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Generate an actionable strategy signal for a market.\n\nDefault: returns 202 with analysis_id for polling.\nWith ?wait=true: blocks until pipeline completes (30-90 seconds).\nIf a cached analysis exists (<24h): returns immediately.\nUse \"force\": true to bypass cache.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"force\": false,\n  \"market_id\": \"KXFED-26MAR19\",\n  \"market_query\": \"\",\n  \"platform\": \"kalshi\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"confidence\": 0.82,\n  \"edge\": 0.09,\n  \"expires_at\": \"2026-03-22T14:30:00Z\",\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"market_id\": \"KXFED-26MAR19\",\n  \"platform\": \"kalshi\",\n  \"recommendation\": \"BUY_YES\",\n  \"risk_rating\": \"low\",\n  \"size_pct\": 0.035,\n  \"target_price\": 0.62,\n  \"time_horizon\": \"days\",\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Scenario analysis \u2014 what-if counterfactual",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/what-if?market_query=&hypothesis=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "what-if"
+              ],
+              "query": [
+                {
+                  "key": "market_query",
+                  "value": "",
+                  "description": "Market question, ticker, or URL",
+                  "disabled": false
+                },
+                {
+                  "key": "hypothesis",
+                  "value": "",
+                  "description": "Hypothetical scenario to evaluate",
+                  "disabled": false
+                },
+                {
+                  "key": "platform",
+                  "value": "",
+                  "description": "Platform hint: 'kalshi' or 'polymarket'",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Analyze how a hypothetical scenario would affect a market's probability.\n\nStrategy tier ($2.00/call)."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Portfolio",
+      "description": "Portfolio-aware strategy, correlation analysis, and hedge recommendations",
+      "item": [
+        {
+          "name": "Portfolio-aware strategy signal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/signals/portfolio",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "signals",
+                "portfolio"
+              ]
+            },
+            "description": "Portfolio-aware strategy signal with correlation analysis and hedge recommendations.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bankroll_usd\": 10000.0,\n  \"market_query\": \"Will the Fed cut rates at the March 2026 meeting?\",\n  \"max_position_pct\": 0.05,\n  \"portfolio\": [\n    {\n      \"entry_price\": 0.55,\n      \"market_id\": \"KXCPI-26MAR\",\n      \"platform\": \"kalshi\",\n      \"side\": \"yes\",\n      \"size_usd\": 250.0\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adjusted_size_pct\": 0.025,\n  \"adjusted_size_usd\": 250.0,\n  \"base_size_pct\": 0.035,\n  \"confidence\": 0.82,\n  \"edge\": 0.09,\n  \"expires_at\": \"2026-03-22T14:30:00Z\",\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"hedge_recommendations\": [\n    {\n      \"market_id\": \"KXUNEMP-4.5\",\n      \"platform\": \"kalshi\",\n      \"rationale\": \"Negatively correlated \\u2014 hedges against strong economy scenario\",\n      \"side\": \"no\",\n      \"suggested_size_usd\": 100.0,\n      \"title\": \"Will unemployment exceed 4.5%?\"\n    }\n  ],\n  \"market_id\": \"KXFED-26MAR19\",\n  \"platform\": \"kalshi\",\n  \"portfolio_impact\": {\n    \"concentration_delta\": 0.15,\n    \"correlated_with\": \"KXCPI-26MAR\",\n    \"max_correlation\": 0.73,\n    \"net_exposure_change\": 250.0,\n    \"portfolio_risk_level\": \"medium\"\n  },\n  \"recommendation\": \"BUY_YES\",\n  \"risk_rating\": \"medium\",\n  \"target_price\": 0.62,\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cross-market correlation analysis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/correlation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "correlation"
+              ]
+            },
+            "description": "Cross-market correlation analysis for portfolio diversification.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market_ids\": [\n    \"KXFED-26MAR19\",\n    \"KXCPI-26MAR\",\n    \"KXUNEMP-4.5\"\n  ],\n  \"period\": \"7d\",\n  \"platform\": \"kalshi\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusters\": [\n    [\n      \"KXFED-26MAR19\",\n      \"KXCPI-26MAR\"\n    ]\n  ],\n  \"concentration_warnings\": [\n    \"KXFED-26MAR19 and KXCPI-26MAR are highly correlated (0.73) \\u2014 holding both creates concentration risk on Fed policy\"\n  ],\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"market_ids\": [\n    \"KXFED-26MAR19\",\n    \"KXCPI-26MAR\",\n    \"KXUNEMP-4.5\"\n  ],\n  \"pairs\": [\n    {\n      \"correlation\": 0.73,\n      \"data_points\": 168,\n      \"market_a\": \"KXFED-26MAR19\",\n      \"market_b\": \"KXCPI-26MAR\",\n      \"relationship\": \"strong_positive\"\n    },\n    {\n      \"correlation\": 0.45,\n      \"data_points\": 168,\n      \"market_a\": \"KXFED-26MAR19\",\n      \"market_b\": \"KXUNEMP-4.5\",\n      \"relationship\": \"positive\"\n    },\n    {\n      \"correlation\": -0.12,\n      \"data_points\": 168,\n      \"market_a\": \"KXCPI-26MAR\",\n      \"market_b\": \"KXUNEMP-4.5\",\n      \"relationship\": \"neutral\"\n    }\n  ],\n  \"period\": \"7d\",\n  \"platform\": \"kalshi\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Arbitrage",
+      "description": "Cross-platform arbitrage detection (Kalshi vs Polymarket vs Robinhood)",
+      "item": [
+        {
+          "name": "Get arbitrage opportunities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/arbitrage",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "arbitrage"
+              ],
+              "query": [
+                {
+                  "key": "min_spread",
+                  "value": "0.02",
+                  "description": "Minimum spread filter",
+                  "disabled": true
+                },
+                {
+                  "key": "expand",
+                  "value": "",
+                  "description": "Comma-separated expansions",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get cached arbitrage opportunities with composite scoring."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"opportunities\": [\n    {\n      \"cheaper_on\": \"kalshi\",\n      \"event\": \"Fed rate cut March 2026\",\n      \"kalshi\": {\n        \"market_id\": \"KXFED-26MAR19\",\n        \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n        \"yes_price\": 0.62\n      },\n      \"match_confidence\": 0.92,\n      \"polymarket\": {\n        \"market_id\": \"0x1234abcd\",\n        \"url\": \"https://polymarket.com/event/fed-rate-cut-march-2026\",\n        \"yes_price\": 0.68\n      },\n      \"scanned_at\": \"2026-03-21T14:30:00Z\",\n      \"score\": 78,\n      \"spread\": 0.06,\n      \"spread_pct\": 6.0\n    }\n  ],\n  \"scanned_at\": \"2026-03-21T14:30:00Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Live arbitrage scan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/arbitrage/live",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "arbitrage",
+                "live"
+              ],
+              "query": [
+                {
+                  "key": "min_spread",
+                  "value": "0.02",
+                  "description": "Minimum spread filter",
+                  "disabled": true
+                },
+                {
+                  "key": "expand",
+                  "value": "",
+                  "description": "Comma-separated expansions",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Run a fresh arbitrage scan (may take 10-30 seconds)."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"opportunities\": [\n    {\n      \"cheaper_on\": \"kalshi\",\n      \"event\": \"Fed rate cut March 2026\",\n      \"kalshi\": {\n        \"market_id\": \"KXFED-26MAR19\",\n        \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n        \"yes_price\": 0.62\n      },\n      \"match_confidence\": 0.92,\n      \"polymarket\": {\n        \"market_id\": \"0x1234abcd\",\n        \"url\": \"https://polymarket.com/event/fed-rate-cut-march-2026\",\n        \"yes_price\": 0.68\n      },\n      \"scanned_at\": \"2026-03-21T14:30:00Z\",\n      \"score\": 78,\n      \"spread\": 0.06,\n      \"spread_pct\": 6.0\n    }\n  ],\n  \"scanned_at\": \"2026-03-21T14:30:00Z\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Consensus",
+      "description": "Agent trade aggregation and crowd probability",
+      "item": [
+        {
+          "name": "Report a trade for consensus",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/trades/report",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "trades",
+                "report"
+              ]
+            },
+            "description": "Report a trade for consensus probability aggregation.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market_id\": \"KXFED-26MAR19\",\n  \"platform\": \"kalshi\",\n  \"price\": 0.62,\n  \"side\": \"yes\",\n  \"size_usd\": 200.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"accepted\",\n  \"trade_count\": 47\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get consensus probability",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/markets/:platform/:market_id/consensus",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "markets",
+                ":platform",
+                ":market_id",
+                "consensus"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "7d",
+                  "description": "Lookback: '24h', '7d', '30d'",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "platform",
+                  "value": "kalshi",
+                  "description": ""
+                },
+                {
+                  "key": "market_id",
+                  "value": "KXFED-26MAR19",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Get consensus probability from aggregated agent trades."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"consensus_probability\": 0.69,\n  \"divergence\": -0.02,\n  \"divergence_signal\": \"crowd_agrees\",\n  \"generated_at\": \"2026-03-21T14:30:00Z\",\n  \"market_id\": \"KXFED-26MAR19\",\n  \"no_trade_count\": 8,\n  \"no_volume_usd\": 1450.0,\n  \"period\": \"7d\",\n  \"platform\": \"kalshi\",\n  \"rekko_probability\": 0.71,\n  \"sample_size\": 23,\n  \"unique_agents\": 8,\n  \"yes_trade_count\": 15,\n  \"yes_volume_usd\": 3200.0\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Streaming",
+      "description": "Real-time SSE event stream and webhooks",
+      "item": [
+        {
+          "name": "List webhooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/webhooks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "webhooks"
+              ]
+            },
+            "description": "List your registered webhooks."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"created_at\": \"2026-03-20T10:00:00Z\",\n    \"enabled\": true,\n    \"events\": [\n      \"whale_alert\",\n      \"analysis_complete\"\n    ],\n    \"failure_count\": 0,\n    \"url\": \"https://my-agent.example.com/webhooks/rekko\",\n    \"webhook_id\": \"wh-f47ac10b58cc\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Register a webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/webhooks",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "webhooks"
+              ]
+            },
+            "description": "Register a webhook for real-time event notifications.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    \"whale_alert\",\n    \"analysis_complete\"\n  ],\n  \"secret\": \"whsec_abc123def456\",\n  \"url\": \"https://my-agent.example.com/webhooks/rekko\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_at\": \"2026-03-20T10:00:00Z\",\n  \"enabled\": true,\n  \"events\": [\n    \"whale_alert\",\n    \"analysis_complete\"\n  ],\n  \"failure_count\": 0,\n  \"url\": \"https://my-agent.example.com/webhooks/rekko\",\n  \"webhook_id\": \"wh-f47ac10b58cc\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Remove a webhook",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/webhooks/:webhook_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhook_id"
+              ],
+              "variable": [
+                {
+                  "key": "webhook_id",
+                  "value": "wh_abc123",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Unregister a webhook."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Real-time SSE event stream",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/stream",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "stream"
+              ],
+              "query": [
+                {
+                  "key": "events",
+                  "value": "",
+                  "description": "Comma-separated event types: price_shift, whale_alert, analysis_complete",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Server-Sent Events stream for real-time market signals."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
