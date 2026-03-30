@@ -324,7 +324,13 @@
                 {
                   "key": "source",
                   "value": "",
-                  "description": "Filter by platform: 'kalshi' or 'polymarket'",
+                  "description": "Filter by platform: 'kalshi', 'polymarket', or 'robinhood'",
+                  "disabled": true
+                },
+                {
+                  "key": "query",
+                  "value": "",
+                  "description": "Search markets by keyword in title (case-insensitive)",
                   "disabled": true
                 },
                 {
@@ -335,7 +341,7 @@
                 }
               ]
             },
-            "description": "List current prediction markets with pricing data."
+            "description": "List current prediction markets with pricing data.\n\nUse ?query= to search by keyword (e.g. ?query=bitcoin).\nUse ?source= to filter by platform."
           },
           "response": [
             {
@@ -890,9 +896,14 @@
           "name": "Scenario analysis \u2014 what-if counterfactual",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "raw": "{{base_url}}/v1/what-if?market_query=&hypothesis=",
+              "raw": "{{base_url}}/v1/what-if",
               "host": [
                 "{{base_url}}"
               ],
@@ -905,13 +916,13 @@
                   "key": "market_query",
                   "value": "",
                   "description": "Market question, ticker, or URL",
-                  "disabled": false
+                  "disabled": true
                 },
                 {
                   "key": "hypothesis",
                   "value": "",
                   "description": "Hypothetical scenario to evaluate",
-                  "disabled": false
+                  "disabled": true
                 },
                 {
                   "key": "platform",
@@ -921,7 +932,16 @@
                 }
               ]
             },
-            "description": "Analyze how a hypothetical scenario would affect a market's probability.\n\nStrategy tier ($2.00/call)."
+            "description": "Analyze how a hypothetical scenario would affect a market's probability.\n\nAccepts either JSON body or query parameters. Strategy tier ($2.00/call).",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           },
           "response": [
             {
