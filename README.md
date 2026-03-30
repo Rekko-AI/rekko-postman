@@ -1,6 +1,6 @@
 # Rekko AI — Postman Collection
 
-Postman collection for the [Rekko AI](https://rekko.ai) Prediction Market Intelligence API.
+Postman collection for the [Rekko AI](https://rekko.ai?utm_source=github&utm_medium=readme&utm_campaign=rekko-postman) Prediction Market Intelligence API.
 
 ## Quick Start
 
@@ -18,7 +18,7 @@ https://raw.githubusercontent.com/Rekko-AI/rekko-postman/main/rekko-api.postman_
 
 ### Get an API Key
 
-Sign up for free at [rekko.ai/dashboard](https://rekko.ai/dashboard) — 100 market listings and 10 AI insights per month, no credit card required.
+Sign up for free at [rekko.ai/dashboard](https://rekko.ai/dashboard?utm_source=github&utm_medium=readme&utm_campaign=rekko-postman) — 100 market listings and 10 AI insights per month, no credit card required.
 
 ## What's Included
 
@@ -50,9 +50,9 @@ Authorization: Bearer rk_free_xxxxx
 
 ## Links
 
-- [API Documentation](https://docs.rekko.ai)
+- [API Documentation](https://docs.rekko.ai?utm_source=github&utm_medium=readme&utm_campaign=rekko-postman)
 - [OpenAPI Spec](https://raw.githubusercontent.com/Rekko-AI/rekko-postman/main/openapi.json)
-- [Sign Up](https://rekko.ai/dashboard)
+- [Sign Up](https://rekko.ai/dashboard?utm_source=github&utm_medium=readme&utm_campaign=rekko-postman)
 - [Status](https://api.rekko.ai/health)
 
 ## Auto-Updated
