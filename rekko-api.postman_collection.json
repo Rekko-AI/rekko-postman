@@ -307,6 +307,246 @@
       "description": "Prediction market listings, history, resolution, and execution guidance",
       "item": [
         {
+          "name": "List prediction market events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "source",
+                  "value": "",
+                  "description": "Filter by platform: 'kalshi' or 'polymarket'",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "Filter by category (e.g., 'politics', 'crypto')",
+                  "disabled": true
+                },
+                {
+                  "key": "featured",
+                  "value": "",
+                  "description": "Only featured events (true) or all (omit)",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum events to return",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "List prediction market events grouped with aggregate stats.\n\nEvents group related individual markets (e.g., \"Who will leave the Trump\nadministration?\" groups 32 individual outcome markets). Sorted by\naggregate 24h volume descending."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"slug\": \"string\",\n    \"title\": \"string\",\n    \"category\": \"\",\n    \"platform\": \"string\",\n    \"market_count\": 0,\n    \"total_volume_24h\": 0.0,\n    \"featured\": false,\n    \"updated_at\": \"string\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Trending events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/trending",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "trending"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum events to return",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Top prediction market events by trending score.\n\nCombines featured status, volume, and recency. Designed for AI agents\nthat want a quick overview of what's hot in prediction markets."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"slug\": \"string\",\n    \"title\": \"string\",\n    \"category\": \"\",\n    \"platform\": \"string\",\n    \"market_count\": 0,\n    \"total_volume_24h\": 0.0,\n    \"featured\": false,\n    \"updated_at\": \"string\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Search events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/search?q=",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "",
+                  "description": "Search query (supports semantic + keyword matching)",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum results",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Search events using hybrid full-text + semantic vector search.\n\nFinds events matching by keyword (\"Iran\") and by meaning (\"US military\nMiddle East\" matches \"US forces enter Iran\"). Uses Reciprocal Rank\nFusion to combine both signals."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"slug\": \"string\",\n    \"title\": \"string\",\n    \"category\": \"\",\n    \"platform\": \"string\",\n    \"market_count\": 0,\n    \"total_volume_24h\": 0.0,\n    \"featured\": false,\n    \"updated_at\": \"string\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get event details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/:slug",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                ":slug"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "",
+                  "description": "Comma-separated expansions: 'markets'",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "example_slug",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Get a single event with aggregate stats and optionally all its markets.\n\nUse ?expand=markets to include individual outcome markets in the response."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slug\": \"string\",\n  \"title\": \"string\",\n  \"category\": \"\",\n  \"platform\": \"string\",\n  \"market_count\": 0,\n  \"total_volume_24h\": 0.0,\n  \"top_yes_price\": {},\n  \"featured\": false,\n  \"also_on\": [\n    {\n      \"platform\": \"string\",\n      \"event_id\": \"string\",\n      \"url\": \"\",\n      \"market_count\": 0\n    }\n  ],\n  \"markets\": {},\n  \"updated_at\": \"string\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "List markets in event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/:slug/markets",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                ":slug",
+                "markets"
+              ],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "example_slug",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "List all individual outcome markets within an event.\n\nReturns markets sorted by 24h volume descending."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"market_id\": \"string\",\n    \"title\": \"string\",\n    \"yes_price\": 0.0,\n    \"volume_24h\": 0.0\n  }\n]"
+            }
+          ]
+        },
+        {
           "name": "List prediction markets",
           "request": {
             "method": "GET",
