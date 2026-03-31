@@ -324,7 +324,7 @@
                 {
                   "key": "source",
                   "value": "",
-                  "description": "Filter by platform: 'kalshi' or 'polymarket'",
+                  "description": "Filter by platform",
                   "disabled": true
                 },
                 {
@@ -564,7 +564,7 @@
                 {
                   "key": "source",
                   "value": "",
-                  "description": "Filter by platform: 'kalshi', 'polymarket', or 'robinhood'",
+                  "description": "Filter by platform",
                   "disabled": true
                 },
                 {
