@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Rekko AI \u2014 Prediction Market Intelligence",
-    "description": "The brain for prediction market trading. Deep AI research, Bayesian causal decomposition, portfolio-aware strategy signals, cross-platform arbitrage, and execution guidance \u2014 all in one API. Covers Kalshi, Polymarket, and Robinhood. Clean flat JSON designed for developers and autonomous trading agents.",
+    "description": "The brain for prediction market trading. Deep AI research, Bayesian causal decomposition, portfolio-aware strategy signals, cross-platform arbitrage, and execution guidance \u2014 all in one API. Covers Kalshi, Polymarket, Robinhood, and Coinbase. Clean flat JSON designed for developers and autonomous trading agents.",
     "contact": {
       "name": "Rekko AI",
       "url": "https://rekko.ai/"
