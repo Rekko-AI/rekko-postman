@@ -355,7 +355,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"category\": \"economics\",\n    \"liquidity\": 85000.0,\n    \"market_id\": \"KXFED-26MAR19\",\n    \"open_interest\": 312000.0,\n    \"platform\": \"kalshi\",\n    \"resolution_date\": \"2026-03-19T20:00:00Z\",\n    \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n    \"updated_at\": \"2026-03-21T14:30:00Z\",\n    \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n    \"volume_24h\": 142350.0,\n    \"yes_price\": 0.62\n  }\n]"
+              "body": "[\n  {\n    \"also_on\": {\n      \"coinbase\": \"https://www.coinbase.com/predictions/event/KXFED-26MAR19\"\n    },\n    \"category\": \"economics\",\n    \"liquidity\": 85000.0,\n    \"market_id\": \"KXFED-26MAR19\",\n    \"open_interest\": 312000.0,\n    \"platform\": \"kalshi\",\n    \"resolution_date\": \"2026-03-19T20:00:00Z\",\n    \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n    \"updated_at\": \"2026-03-21T14:30:00Z\",\n    \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n    \"volume_24h\": 142350.0,\n    \"yes_price\": 0.62\n  }\n]"
             }
           ]
         },
@@ -410,7 +410,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"category\": \"economics\",\n  \"liquidity\": 85000.0,\n  \"market_id\": \"KXFED-26MAR19\",\n  \"open_interest\": 312000.0,\n  \"platform\": \"kalshi\",\n  \"resolution_date\": \"2026-03-19T20:00:00Z\",\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n  \"updated_at\": \"2026-03-21T14:30:00Z\",\n  \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n  \"volume_24h\": 142350.0,\n  \"yes_price\": 0.62\n}"
+              "body": "{\n  \"also_on\": {\n    \"coinbase\": \"https://www.coinbase.com/predictions/event/KXFED-26MAR19\"\n  },\n  \"category\": \"economics\",\n  \"liquidity\": 85000.0,\n  \"market_id\": \"KXFED-26MAR19\",\n  \"open_interest\": 312000.0,\n  \"platform\": \"kalshi\",\n  \"resolution_date\": \"2026-03-19T20:00:00Z\",\n  \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n  \"updated_at\": \"2026-03-21T14:30:00Z\",\n  \"url\": \"https://kalshi.com/markets/kxfed/kxfed-26mar19\",\n  \"volume_24h\": 142350.0,\n  \"yes_price\": 0.62\n}"
             }
           ]
         },
