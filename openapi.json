@@ -220,7 +220,7 @@
             "schema": {
               "type": "string",
               "maxLength": 20,
-              "pattern": "^(kalshi|polymarket|robinhood|)$",
+              "pattern": "^(kalshi|polymarket|robinhood|metaculus|)$",
               "description": "Filter by platform",
               "default": "",
               "title": "Source"
@@ -541,7 +541,7 @@
             "schema": {
               "type": "string",
               "maxLength": 20,
-              "pattern": "^(kalshi|polymarket|robinhood|)$",
+              "pattern": "^(kalshi|polymarket|robinhood|metaculus|)$",
               "description": "Filter by platform",
               "default": "",
               "title": "Source"
