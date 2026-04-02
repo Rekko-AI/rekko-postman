@@ -500,7 +500,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"slug\": \"string\",\n  \"title\": \"string\",\n  \"category\": \"\",\n  \"platform\": \"string\",\n  \"market_count\": 0,\n  \"total_volume_24h\": 0.0,\n  \"top_yes_price\": {},\n  \"featured\": false,\n  \"also_on\": [\n    {\n      \"platform\": \"string\",\n      \"event_id\": \"string\",\n      \"url\": \"\",\n      \"market_count\": 0\n    }\n  ],\n  \"markets\": {},\n  \"updated_at\": \"string\"\n}"
+              "body": "{\n  \"slug\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"\",\n  \"category\": \"\",\n  \"platform\": \"string\",\n  \"market_count\": 0,\n  \"total_volume_24h\": 0.0,\n  \"top_yes_price\": {},\n  \"mutually_exclusive\": {},\n  \"status\": \"open\",\n  \"end_date\": {},\n  \"featured\": false,\n  \"also_on\": [\n    {\n      \"platform\": \"string\",\n      \"event_id\": \"string\",\n      \"url\": \"\",\n      \"market_count\": 0\n    }\n  ],\n  \"markets\": {},\n  \"updated_at\": \"string\"\n}"
             }
           ]
         },
@@ -542,7 +542,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"market_id\": \"string\",\n    \"title\": \"string\",\n    \"yes_price\": 0.0,\n    \"volume_24h\": 0.0\n  }\n]"
+              "body": "[\n  {\n    \"market_id\": \"string\",\n    \"title\": \"string\",\n    \"yes_price\": 0.0,\n    \"volume_24h\": 0.0,\n    \"url\": \"\",\n    \"open_interest\": {},\n    \"spread\": {}\n  }\n]"
             }
           ]
         },
@@ -856,6 +856,188 @@
                 }
               ],
               "body": "[\n  {\n    \"action\": \"analyze\",\n    \"cached_confidence\": 0.82,\n    \"cached_edge\": 0.09,\n    \"cached_recommendation\": \"BUY_YES\",\n    \"category\": \"economics\",\n    \"market_id\": \"KXFED-26MAR19\",\n    \"platform\": \"kalshi\",\n    \"score\": 1.45,\n    \"title\": \"Will the Fed cut rates at the March 2026 meeting?\",\n    \"trend\": \"rising\",\n    \"volume_24h\": 142350.0,\n    \"volume_spike\": true,\n    \"yes_price\": 0.62\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Event Analysis",
+      "description": "",
+      "item": [
+        {
+          "name": "Trigger event analysis",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/:slug/analyze",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                ":slug",
+                "analyze"
+              ],
+              "query": [
+                {
+                  "key": "force",
+                  "value": "False",
+                  "description": "Re-analyze even if a recent analysis exists",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "example_slug",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Trigger an asynchronous event analysis on a group of related markets.\n\nReturns an analysis_id (run_id) that can be polled via GET /events/{slug}/analysis.\nRequires INSIGHT tier."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}"
+            }
+          ]
+        },
+        {
+          "name": "Get event analysis",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/:slug/analysis",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                ":slug",
+                "analysis"
+              ],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "example_slug",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Fetch the latest completed event analysis.\n\nReturns 404 if no analysis exists, 202 if still running.\nRequires INSIGHT tier."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"event_slug\": \"string\",\n  \"event_title\": \"string\",\n  \"platform\": \"string\",\n  \"category\": \"\",\n  \"market_count\": 0,\n  \"summary\": \"string\",\n  \"recommendation\": \"string\",\n  \"top_picks\": [\n    \"string\"\n  ],\n  \"confidence\": 0.0,\n  \"market_breakdowns\": [\n    {}\n  ],\n  \"correlations\": [\n    {}\n  ],\n  \"probability_sum\": 0.0,\n  \"mutually_exclusive\": {},\n  \"what_would_change_mind\": [\n    \"string\"\n  ],\n  \"analyzed_at\": \"string\",\n  \"models_used\": [\n    \"string\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Event probability map",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/:slug/probability-map",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                ":slug",
+                "probability-map"
+              ],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "example_slug",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "All outcome probabilities for an event: market price vs estimated probability.\n\nLightweight extraction from the latest analysis \u2014 no new pipeline run.\nRequires INSIGHT tier."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"event_slug\": \"string\",\n  \"event_title\": \"string\",\n  \"mutually_exclusive\": {},\n  \"probability_sum\": 0.0,\n  \"probability_sum_valid\": false,\n  \"outcomes\": [\n    {}\n  ],\n  \"analyzed_at\": \"string\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Event market correlations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/events/:slug/correlation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "events",
+                ":slug",
+                "correlation"
+              ],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "example_slug",
+                  "description": ""
+                }
+              ]
+            },
+            "description": "Within-event market correlations from the latest analysis.\n\nReturns detected relationships: mutually_exclusive, positively_correlated,\nnegatively_correlated, conditional, independent.\nRequires DEEP tier."
+          },
+          "response": [
+            {
+              "name": "Successful Response",
+              "status": "Successful Response",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {}\n]"
             }
           ]
         }
